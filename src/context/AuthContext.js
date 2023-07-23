@@ -18,15 +18,11 @@ export const AuthContextProvider = ({ children }) => {
 
   const signUp = async (email, password) => {
     try {
-      // Create a new user with email and password
       await createUserWithEmailAndPassword(auth, email, password);
-
-      // Once the user is created, update the user's document in the Firestore database
       await setDoc(doc(db, "users", email), {
         watchList: [],
       });
 
-      // After both operations are complete, you can navigate to the "/account" page
       navigate("/account");
     } catch (error) {
       console.log(error);
